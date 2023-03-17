@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ES6</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <!-- Phan tab menu -->
+    <ul class="nav nav-tabs" role="tablist">
+      <li class="nav-item">
+        <a
+          class="nav-link active"
+          href="#"
+          role="tab"
+          data-toggle="tab"
+          ><h2>Quản lý Người Dùng</h2></a
+        >
+      </li>
+    </ul>
+    <br>
+      <!-- Tab panes -->
+      <div class="tab-content">
+          <!--Danh sách sản phẩm -->
+          <div role="tabpanel" class="tab-pane  in active" id="DanhSachSP">
+            <div class="row">
+              <div class="col-md-8">
+                <!-- BEGIN BUTTOM THÊM MỚI -->
+                <button
+                  id="btnThemStudent"
+                  class="btn btn-success"
+                  type="button"
+                  data-toggle="modal"
+                  data-target="#myModal"
+                >
+                  Thêm Student
+                </button>
+
+                <button id="btnThemEmployee" class="btn btn-success" type="button" data-toggle="modal" data-target="#myModal1">Thêm Employee</button>
+                <button id="btnThemCustomer" class="btn btn-success" type="button" data-toggle="modal" data-target="#myModal2">Thêm Customer</button>
+                <!-- END BUTTON THÊM MỚI -->
+              </div>
+              <div class="col-md-4">
+                <!-- BEGIN TÌM KIẾM -->
+                <div class="input-group mb-3">
+                  <select class="form-control" name="brand" id="Search">
+                    <option selected disabled value="">Chọn người dùng</option>
+                    <option value="Student">Student</option>
+                    <option value="Employee">Employee</option>
+                    <option value="Customer">Customer</option>
+                </select>
+                </div>
+                <!-- END TÌM KIẾM -->
+              </div>
+            </div>
+            <div class="clear-fix"></div>
+            <div class="tblSanPham" id="tblSanPham">
+              <!-- BEGIN TABLE SẢN PHẨM -->
+              <table class="table table-bordered">
+                <thead>
+                  <th>ID</th>
+                  <th>Họ tên</th>
+                  <th>Địa chỉ</th>
+                  <th>Email</th>
+                  <th>Người dùng</th>   
+                  <th>Tổng kết</th>             
+                </thead>
+                <tbody id="tblDanhSachSP"></tbody>
+              </table>
+              <!-- END TABLE SẢN PHẨM -->
+            </div>
+            <br />
+          </div>
+          <!-- Kết thúc danh sách sản phẩm -->       
+        </div>
+
+         <!--KetThuc Tabmenu-->
+
+        <!-- The Modal -->
+        <div class="modal fade" id="myModal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h3>Quản lí người dùng</h3>
+              </div> 
+              <div class="modal-body">
+
+                <div class="form-group">
+
+                    <!-- Name -->
+                    <div class="input-group">
+                        <input type="text" name="name" id="name" class="form-control input-sm" placeholder="Họ tên">
+                    </div>
+                    <span class="sp-thongbao text-danger" id="tbName">&zwj;</span>
+                    
+                    <!-- Address -->
+                    <div class="input-group">
+                      <input type="text" name="address" id="address" class="form-control input-sm" placeholder="Địa chỉ">
+                    </div>
+                    <span class="sp-thongbao text-danger" id="tbAddress">&zwj;</span>
+                    
+                    <!-- Email -->
+                    <div class="input-group">
+                        <input type="text" name="email" id="email" class="form-control input-sm" placeholder="Email">
+                    </div>
+                    <span class="sp-thongbao text-danger" id="tbEmail">&zwj;</span>
+
+                    <!-- Điểm Toán  -->
+                    <div class="input-group">
+                      <input type="text" name="math" id="math" class="form-control input-sm" placeholder="Điểm Toán">
+                    </div>
+                    <span class="sp-thongbao text-danger" id="tbMath">&zwj;</span>
+
+                   <!-- Điểm Lý -->
+                   <div class="input-group">
+                    <input type="text" name="physics" id="physics" class="form-control input-sm" placeholder="Điểm Lý">
+                   </div>
+                   <span class="sp-thongbao text-danger" id="tbPhysics">&zwj;</span>
+                   <!-- Điểm Hóa -->
+                   <div class="input-group">
+                    <input type="text" name="chemistry" id="chemistry" class="form-control input-sm" placeholder="Điểm Hóa">
+                    </div>
+                    <span class="sp-thongbao text-danger" id="tbChemistry">&zwj;</span>
+                </div>
+
+                <!-- popup -->
+              <div class="modal-content-popup"></div>
+              </div>
+              <div class="modal-footer">
+                <button id="btnThemNV" type="button" onclick="createStudent()" class="btn btn-success">Thêm người dùng</button>
+					      <button id="btnCapNhat" type="button" onclick="UpdateNV()" class="btn btn-success">Cập nhật</button>
+					      <button id="btnDong" type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal fade" id="myModal1">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h3>Quản lí người dùng</h3>
+              </div> 
+              <div class="modal-body">
+
+                <div class="form-group">
+
+                    <!-- Name -->
+                    <div class="input-group">
+                        <input type="text" name="name" id="name" class="form-control input-sm" placeholder="Họ tên">
+                    </div>
+                    <span class="sp-thongbao text-danger" id="tbName">&zwj;</span>
+                    
+                    <!-- Address -->
+                    <div class="input-group">
+                      <input type="text" name="address" id="address" class="form-control input-sm" placeholder="Địa chỉ">
+                    </div>
+                    <span class="sp-thongbao text-danger" id="tbAddress">&zwj;</span>
+                    
+                    <!-- Email -->
+                    <div class="input-group">
+                        <input type="text" name="email" id="email" class="form-control input-sm" placeholder="Email">
+                    </div>
+                    <span class="sp-thongbao text-danger" id="tbEmail">&zwj;</span>
+
+                    <!-- Số ngày làm việc  -->
+                    <div class="input-group">
+                      <input type="text" name="math" id="math" class="form-control input-sm" placeholder="Số ngày làm việc">
+                    </div>
+                    <span class="sp-thongbao text-danger" id="tbDay">&zwj;</span>
+
+                   <!-- Lương -->
+                   <div class="input-group">
+                    <input type="text" name="physics" id="physics" class="form-control input-sm" placeholder="Lương">
+                   </div>
+                   <span class="sp-thongbao text-danger" id="tbLuong">&zwj;</span>
+                </div>
+                
+                <!-- popup -->
+              <div class="modal-content-popup"></div>
+              </div>
+              <div class="modal-footer">
+                <button id="btnThemNV" type="button" onclick="createPerson()" class="btn btn-success">Thêm người dùng</button>
+					      <button id="btnCapNhat" type="button" onclick="UpdateNV()" class="btn btn-success">Cập nhật</button>
+					      <button id="btnDong" type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal fade" id="myModal2">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h3>Quản lí người dùng</h3>
+              </div> 
+              <div class="modal-body">
+
+                <div class="form-group">
+
+                    <!-- Name -->
+                    <div class="input-group">
+                        <input type="text" name="name" id="name" class="form-control input-sm" placeholder="Họ tên">
+                    </div>
+                    <span class="sp-thongbao text-danger" id="tbName">&zwj;</span>
+                    
+                    <!-- Address -->
+                    <div class="input-group">
+                      <input type="text" name="address" id="address" class="form-control input-sm" placeholder="Địa chỉ">
+                    </div>
+                    <span class="sp-thongbao text-danger" id="tbAddress">&zwj;</span>
+                    
+                    <!-- Email -->
+                    <div class="input-group">
+                        <input type="text" name="email" id="email" class="form-control input-sm" placeholder="Email">
+                    </div>
+                    <span class="sp-thongbao text-danger" id="tbEmail">&zwj;</span>
+
+                    <!-- Điểm Toán  -->
+                    <div class="input-group">
+                      <input type="text" name="company" id="company" class="form-control input-sm" placeholder="Tên công ty">
+                    </div>
+                    <span class="sp-thongbao text-danger" id="tbCompany">&zwj;</span>
+
+                   <!-- Điểm Lý -->
+                   <div class="input-group">
+                    <input type="text" name="physics" id="physics" class="form-control input-sm" placeholder="Giá trị hóa đơn">
+                   </div>
+                   <span class="sp-thongbao text-danger" id="tbValue">&zwj;</span>
+                   <!-- Điểm Hóa -->
+                   <div class="input-group">
+                    <input type="text" name="chemistry" id="chemistry" class="form-control input-sm" placeholder="Đánh giá">
+                    </div>
+                    <span class="sp-thongbao text-danger" id="tbRating">&zwj;</span>
+                </div>
+
+                <!-- popup -->
+              <div class="modal-content-popup"></div>
+              </div>
+              <div class="modal-footer">
+                <button id="btnThemNV" type="button" onclick="createPerson()" class="btn btn-success">Thêm người dùng</button>
+					      <button id="btnCapNhat" type="button" onclick="UpdateNV()" class="btn btn-success">Cập nhật</button>
+					      <button id="btnDong" type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+<!-- Bootstrap -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>  
+<!-- Hoàng Nghĩa -->
+<script src="js/models/products.js"></script>
+<script src="js/services/productAPI.js"></script>
+  <script src="js/controllers/main.js"></script>
+  
+  
+</body>
