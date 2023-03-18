@@ -1,40 +1,38 @@
-const URL ="https://640cb0a694ce1239b0b3693a.mockapi.io/api/products";
- function apiGetPerson(searchValue){
-    return axios({
-        method:"GET",
-        url: URL,
-        params: {
-          name: searchValue || undefined,
-        },
-    });
+const URL = "https://640cb0a694ce1239b0b3693a.mockapi.io/api/products";
+
+async function apiGetPerson() {
+   return await axios({
+    method: "GET",
+    url: URL,
+  });
 }
 
- function apiCreatePerson(product){
-  return axios({
+async function apiCreatePerson(product) {
+  return await axios({
     method: "POST",
     url: URL,
     data: product,
   });
 }
 
- function apiDeletePerson(productID){
+function apiDeletePerson(productID) {
   return axios({
-    method:"DELETE",
+    method: "DELETE",
     url: `${URL}/${productID}`,
   });
 }
 
- function apiGetPersonByID(productID){
+function apiGetPersonById(productID) {
   return axios({
     method: "GET",
     url: `${URL}/${productID}`,
   });
 }
 
- function apiUpdatePerson(productID,product){
-  return axios({
-    method:"PUT",
+async function apiUpdateProduct(productID, product) {
+  return await axios({
+    method: "PUT",
     url: `${URL}/${productID}`,
-    data:product,
+    data: product,
   });
 }
